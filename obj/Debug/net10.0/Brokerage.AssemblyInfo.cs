@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Brokerage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecbc5d4d92a49b2d03c49973d8d5c172850f7582")]
 [assembly: System.Reflection.AssemblyProductAttribute("Brokerage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Brokerage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

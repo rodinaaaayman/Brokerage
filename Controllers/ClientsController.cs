@@ -1,6 +1,6 @@
 ﻿using Brokerage.Data;
 using Brokerage.DTOs;
-using Brokerage.Models.Entities;
+using Brokerage.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,13 +25,13 @@ namespace Brokerage.Controllers
 
         // GET: api/Clients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ClientDto>>> GetClients()
+        public async Task<ActionResult<IEnumerable<ClientsDTO>>> GetClients()
         {
             var clients = await _context.Clients
                 .Where(c => c.IsActive)
-                .Select(c => new ClientDto
+                .Select(c => new ClientsDTO
                 {
-                    ClientId = c.Id,
+                    Id = c.Id,
                     Name = c.Name,
                     Email = c.Email,
                     NationalID = c.NationalID,
@@ -45,13 +45,13 @@ namespace Brokerage.Controllers
 
         // GET: api/Clients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ClientDto>> GetClients(int id)
+        public async Task<ActionResult<ClientsDTO>> GetClients(int id)
         {
             var client = await _context.Clients
                 .Where(c => c.Id == id && c.IsActive)
-                .Select(c => new ClientDto
+                .Select(c => new ClientsDTO
                 {
-                    ClientId = c.Id,
+                    Id = c.Id,
                     Name = c.Name,
                     Email = c.Email,
                     NationalID = c.NationalID,
@@ -108,7 +108,7 @@ namespace Brokerage.Controllers
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                PasswordHash = dto.PasswordHash,
+                Password = dto.PasswordHash,
                 NationalID = dto.NationalID,
                 PhoneNumber = dto.PhoneNumber
             };

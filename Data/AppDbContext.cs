@@ -1,6 +1,54 @@
-﻿namespace Brokerage.Data
+﻿using Brokerage.Models;
+using Microsoft.EntityFrameworkCore;
+//using System.Reflection.Emit;
+namespace Brokerage.Data
 {
-    public class AppDbContext
+    public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        { }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Clients> Clients { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Admins> Admins { get; set; }
+        public DbSet<Brokers> Brokers { get; set; }
+        
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configure Table-Per-Hierarchy inheritance for Users
+            modelBuilder.Entity<Users>()
+                .HasDiscriminator<string>("UserType")
+                .HasValue<Users>("User")
+                .HasValue<Clients>("Client")
+                .HasValue<Admins>("Admin")
+                .HasValue<Brokers>("Broker");
+
+            modelBuilder.Entity<Clients>()
+                .HasIndex(c => c.Email)
+                .IsUnique();
+            modelBuilder.Entity<Clients>()
+                .HasIndex(c => c.NationalID)
+                .IsUnique();
+            modelBuilder.Entity<Orders>()
+                .Property(o => o.NetAmount)
+                .HasComputedColumnSql("[Quantity] * [UnitPrice]", true);
+
+
+            modelBuilder.Entity<Orders>()
+                .Property(o => o.Commission)
+                .HasComputedColumnSql("([Quantity] * [UnitPrice]) * [CommissionRate] / 100", true);
+
+
+            modelBuilder.Entity<Orders>()
+                .Property(o => o.GrossAmount)
+                .HasComputedColumnSql("([Quantity] * [UnitPrice]) + (([Quantity] * [UnitPrice]) * [CommissionRate] / 100)", true);
+
+
+
+            base.OnModelCreating(modelBuilder);
+
+        }
     }
 }

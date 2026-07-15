@@ -1,6 +1,6 @@
-﻿using BrokerageFinal.Data;
-using BrokerageFinal.DTOs;
-using BrokerageFinal.Models.Entities;
+﻿using Brokerage.Data;
+using Brokerage.DTOs;
+using Brokerage.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Net;
 namespace BrokerageFinal.Controllers
 {
     [Route("api/[controller]")]
@@ -78,7 +78,7 @@ namespace BrokerageFinal.Controllers
         //POST: api/Orders
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Orders>> PostOrder(CreateOrderDTO dto)
+        public async Task<ActionResult<Orders>> PostOrder(CreateOrdersDTO dto)
         {
             var client = await _context.Clients
                 .FirstOrDefaultAsync(c => c.Id == dto.ClientId && c.IsActive);
