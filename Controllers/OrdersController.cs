@@ -1,0 +1,126 @@
+﻿using BrokerageFinal.Data;
+using BrokerageFinal.DTOs;
+using BrokerageFinal.Models.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BrokerageFinal.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OrdersController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+
+        public OrdersController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Orders
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Orders>>> GetOrders()
+        {
+            return await _context.Orders.ToListAsync();
+        }
+
+        // GET: api/Orders/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Orders>> GetOrders(int id)
+        {
+            var orders = await _context.Orders.FindAsync(id);
+
+            if (orders == null)
+            {
+                return NotFound();
+            }
+
+            return orders;
+        }
+
+        // PUT: api/Orders/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutOrders(int id, Orders orders)
+        {
+            if (id != orders.OrderId)
+            {
+                return BadRequest();
+            }
+
+
+            _context.Entry(orders).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrdersExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        //POST: api/Orders
+        //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Orders>> PostOrder(CreateOrderDTO dto)
+        {
+            var client = await _context.Clients
+                .FirstOrDefaultAsync(c => c.Id == dto.ClientId && c.IsActive);
+
+
+            if (client == null)
+            {
+                return BadRequest("Invalid client ID.");
+            }
+
+            var order = new Orders
+            {
+                ClientId = dto.ClientId,
+                UnitPrice = dto.UnitPrice,
+                Quantity = dto.Quantity
+            };
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetOrders), new { id = order.OrderId }, order);
+        }
+
+        // DELETE: api/Orders/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrders(int id)
+        {
+            var orders = await _context.Orders.FindAsync(id);
+            if (orders == null)
+            {
+                return NotFound();
+            }
+
+            _context.Orders.Remove(orders);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool OrdersExists(int id)
+        {
+            return _context.Orders.Any(e => e.OrderId == id);
+        }
+    }
+}

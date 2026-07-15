@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "EJrSCmhbPxo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Copy Center\\source\\repos\\Brokerage\\Brokerage\\Brokerage.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Copy Center\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.4\\microsoft.aspnetcore.openapi.10.0.4.nupkg.sha512",
+    "C:\\Users\\Copy Center\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Microsoft.OpenApi' 2.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
+      "projectPath": "C:\\Users\\Copy Center\\source\\repos\\Brokerage\\Brokerage\\Brokerage.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Copy Center\\source\\repos\\Brokerage\\Brokerage\\Brokerage.csproj",
+      "libraryId": "Microsoft.OpenApi",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}
