@@ -106,9 +106,10 @@ namespace Brokerage.Controllers
         {
             var client = new Clients
             {
+                Username = dto. Username,
                 Name = dto.Name,
                 Email = dto.Email,
-                Password = dto.PasswordHash,
+                Password = dto.Password,
                 NationalID = dto.NationalID,
                 PhoneNumber = dto.PhoneNumber
             };

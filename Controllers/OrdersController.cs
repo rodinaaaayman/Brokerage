@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+
 namespace BrokerageFinal.Controllers
 {
     [Route("api/[controller]")]
@@ -24,11 +25,20 @@ namespace BrokerageFinal.Controllers
 
         // GET: api/Orders
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Orders>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<OrdersDTO>>> GetOrders()
         {
-            return await _context.Orders.ToListAsync();
-        }
+            var orders = await _context.Orders
+                .Select(o => new OrdersDTO
+                {
+                    OrderId = o.OrderId,
+                    Quantity = o.Quantity,
+                    UnitPrice = o.UnitPrice,
+                    ClientId = o.Id
+                })
+                .ToListAsync();
 
+            return Ok(orders);
+        }
         // GET: api/Orders/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Orders>> GetOrders(int id)
@@ -81,7 +91,7 @@ namespace BrokerageFinal.Controllers
         public async Task<ActionResult<Orders>> PostOrder(CreateOrdersDTO dto)
         {
             var client = await _context.Clients
-                .FirstOrDefaultAsync(c => c.Id == dto.ClientId && c.IsActive);
+                .FirstOrDefaultAsync(c => c.Id == dto.Id && c.IsActive);
 
 
             if (client == null)
@@ -91,7 +101,9 @@ namespace BrokerageFinal.Controllers
 
             var order = new Orders
             {
-                ClientId = dto.ClientId,
+                Id = dto.Id,
+                OrderType=dto.OrderType,
+                LimitPrice = dto.LimitPrice,
                 UnitPrice = dto.UnitPrice,
                 Quantity = dto.Quantity
             };

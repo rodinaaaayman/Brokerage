@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Brokerage.Models
 {
@@ -10,8 +11,8 @@ namespace Brokerage.Models
         public int OrderId { get; set; }
 
         [ForeignKey("Client")]
-        public int ClientId { get; set; }
-        public OrderTypes OrderType { get; set; }
+        public int Id { get; set; }
+        public OrderTypes OrderType { get; set; } = OrderTypes.Market;
         public enum OrderTypes { Market, Limit }
         public decimal LimitPrice { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
@@ -32,7 +33,7 @@ namespace Brokerage.Models
         public decimal CommissionRate { get; set; } = 0.005m;
         [StringLength(50)]
         public string? Status { get; set; } = "Pending";
-
+        [JsonIgnore]
         public Clients? Client { get; set; }
     }
 }

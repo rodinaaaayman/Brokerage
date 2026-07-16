@@ -30,9 +30,6 @@ namespace Brokerage.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Commission")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("decimal(18,2)")
@@ -48,6 +45,9 @@ namespace Brokerage.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("decimal(18,2)")
                         .HasComputedColumnSql("([Quantity] * [UnitPrice]) + (([Quantity] * [UnitPrice]) * [CommissionRate] / 100)", true);
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("LimitPrice")
                         .HasColumnType("decimal(18,2)");
@@ -75,7 +75,7 @@ namespace Brokerage.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("Id");
 
                     b.ToTable("Orders");
                 });
@@ -101,11 +101,6 @@ namespace Brokerage.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserType")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -113,11 +108,9 @@ namespace Brokerage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
-                    b.HasDiscriminator<string>("UserType").HasValue("User");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("BrokersClients", b =>
@@ -139,14 +132,14 @@ namespace Brokerage.Migrations
                 {
                     b.HasBaseType("Brokerage.Models.Users");
 
-                    b.HasDiscriminator().HasValue("Admin");
+                    b.ToTable("Admins", (string)null);
                 });
 
             modelBuilder.Entity("Brokerage.Models.Brokers", b =>
                 {
                     b.HasBaseType("Brokerage.Models.Users");
 
-                    b.HasDiscriminator().HasValue("Broker");
+                    b.ToTable("Brokers", (string)null);
                 });
 
             modelBuilder.Entity("Brokerage.Models.Clients", b =>
@@ -181,14 +174,14 @@ namespace Brokerage.Migrations
                         .IsUnique()
                         .HasFilter("[NationalID] IS NOT NULL");
 
-                    b.HasDiscriminator().HasValue("Client");
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("Brokerage.Models.Orders", b =>
                 {
                     b.HasOne("Brokerage.Models.Clients", "Client")
                         .WithMany("Orders")
-                        .HasForeignKey("ClientId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -206,6 +199,33 @@ namespace Brokerage.Migrations
                     b.HasOne("Brokerage.Models.Clients", null)
                         .WithMany()
                         .HasForeignKey("ClientsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Brokerage.Models.Admins", b =>
+                {
+                    b.HasOne("Brokerage.Models.Users", null)
+                        .WithOne()
+                        .HasForeignKey("Brokerage.Models.Admins", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Brokerage.Models.Brokers", b =>
+                {
+                    b.HasOne("Brokerage.Models.Users", null)
+                        .WithOne()
+                        .HasForeignKey("Brokerage.Models.Brokers", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Brokerage.Models.Clients", b =>
+                {
+                    b.HasOne("Brokerage.Models.Users", null)
+                        .WithOne()
+                        .HasForeignKey("Brokerage.Models.Clients", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

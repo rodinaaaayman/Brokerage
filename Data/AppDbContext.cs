@@ -18,12 +18,12 @@ namespace Brokerage.Data
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure Table-Per-Hierarchy inheritance for Users
-            modelBuilder.Entity<Users>()
-                .HasDiscriminator<string>("UserType")
-                .HasValue<Users>("User")
-                .HasValue<Clients>("Client")
-                .HasValue<Admins>("Admin")
-                .HasValue<Brokers>("Broker");
+            //modelBuilder.Entity<Users>()
+            //    .HasDiscriminator<string>("UserType")
+            //    .HasValue<Users>("User")
+            //    .HasValue<Clients>("Client")
+            //    .HasValue<Admins>("Admin")
+            //    .HasValue<Brokers>("Broker");
 
             modelBuilder.Entity<Clients>()
                 .HasIndex(c => c.Email)
@@ -45,10 +45,29 @@ namespace Brokerage.Data
                 .Property(o => o.GrossAmount)
                 .HasComputedColumnSql("([Quantity] * [UnitPrice]) + (([Quantity] * [UnitPrice]) * [CommissionRate] / 100)", true);
 
+            modelBuilder.Entity<Users>()
+                .ToTable("Users");
+
+            modelBuilder.Entity<Clients>()
+                .ToTable("Clients");
+
+            modelBuilder.Entity<Brokers>()
+                .ToTable("Brokers");
+
+            modelBuilder.Entity<Admins>()
+                .ToTable("Admins");
+
+
+            modelBuilder.Entity<Clients>()
+                .HasIndex(c => c.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Clients>()
+                .HasIndex(c => c.NationalID)
+                .IsUnique();
 
 
             base.OnModelCreating(modelBuilder);
-
         }
     }
 }
