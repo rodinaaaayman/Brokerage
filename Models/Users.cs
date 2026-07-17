@@ -19,6 +19,6 @@ namespace Brokerage.Models
         [Required]
         public string Password { get; set; } = string.Empty;
         [Required]
-        public string Role { get; set; } = "Client";
+        public string Role { get; set; } 
     }
 }

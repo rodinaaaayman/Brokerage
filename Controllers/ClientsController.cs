@@ -111,7 +111,8 @@ namespace Brokerage.Controllers
                 Email = dto.Email,
                 Password = dto.Password,
                 NationalID = dto.NationalID,
-                PhoneNumber = dto.PhoneNumber
+                PhoneNumber = dto.PhoneNumber,
+                Role = "Client"
             };
 
             client.Deposit(dto.Deposit);
