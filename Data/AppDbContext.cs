@@ -13,9 +13,10 @@ namespace Brokerage.Data
         public DbSet<Orders> Orders { get; set; }
         public DbSet<Admins> Admins { get; set; }
         public DbSet<Brokers> Brokers { get; set; }
-        
-    
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<Executions> Executions { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure Table-Per-Hierarchy inheritance for Users
             //modelBuilder.Entity<Users>()

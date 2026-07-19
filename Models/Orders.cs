@@ -1,5 +1,6 @@
 ﻿using Brokerage.DTOs;
 using FluentValidation;
+using System.CodeDom.Compiler;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -34,10 +35,18 @@ namespace Brokerage.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public decimal GrossAmount { get; private set; }
         public decimal CommissionRate { get; set; } = 0.005m;
+        public enum OrderStatus
+        {
+            Pending,
+            PartiallyFilled,
+            Filled, 
+            Canceled
+        }
         [StringLength(50)]
-        public string? Status { get; set; } = "Pending";
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
         [JsonIgnore]
         public Clients? Client { get; set; }
+        public ICollection<Executions> Executions { get; set; } = new List<Executions>();
     }
     public class CreateOrderDTOValidator : AbstractValidator<CreateOrdersDTO>
     {

@@ -22,6 +22,30 @@ namespace Brokerage.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Brokerage.Models.Executions", b =>
+                {
+                    b.Property<int>("ExecutionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExecutionId"));
+
+                    b.Property<DateTime>("ExecutionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExecutionQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExecutionId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Executions");
+                });
+
             modelBuilder.Entity("Brokerage.Models.Orders", b =>
                 {
                     b.Property<int>("OrderId")
@@ -66,9 +90,9 @@ namespace Brokerage.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
+                    b.Property<int>("Status")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
@@ -177,6 +201,17 @@ namespace Brokerage.Migrations
                     b.ToTable("Clients", (string)null);
                 });
 
+            modelBuilder.Entity("Brokerage.Models.Executions", b =>
+                {
+                    b.HasOne("Brokerage.Models.Orders", "Order")
+                        .WithMany("Executions")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Brokerage.Models.Orders", b =>
                 {
                     b.HasOne("Brokerage.Models.Clients", "Client")
@@ -228,6 +263,11 @@ namespace Brokerage.Migrations
                         .HasForeignKey("Brokerage.Models.Clients", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Brokerage.Models.Orders", b =>
+                {
+                    b.Navigation("Executions");
                 });
 
             modelBuilder.Entity("Brokerage.Models.Clients", b =>
