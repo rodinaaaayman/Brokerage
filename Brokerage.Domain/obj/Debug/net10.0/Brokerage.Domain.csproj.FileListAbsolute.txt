@@ -1,0 +1,13 @@
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\bin\Debug\net10.0\Brokerage.Domain.deps.json
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\bin\Debug\net10.0\Brokerage.Domain.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\bin\Debug\net10.0\Brokerage.Domain.pdb
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\Brokerage.Domain.csproj.AssemblyReference.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\Brokerage.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\Brokerage.Domain.AssemblyInfoInputs.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\Brokerage.Domain.AssemblyInfo.cs
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\Brokerage.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\Brokerage.Domain.sourcelink.json
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\Brokerage.Domain.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\refint\Brokerage.Domain.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\Brokerage.Domain.pdb
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Domain\obj\Debug\net10.0\ref\Brokerage.Domain.dll

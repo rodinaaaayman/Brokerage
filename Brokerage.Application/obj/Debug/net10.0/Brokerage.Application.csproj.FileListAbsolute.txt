@@ -1,0 +1,16 @@
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\bin\Debug\net10.0\Brokerage.Application.deps.json
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\bin\Debug\net10.0\Brokerage.Application.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\bin\Debug\net10.0\Brokerage.Application.pdb
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\bin\Debug\net10.0\Brokerage.Domain.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\bin\Debug\net10.0\Brokerage.Domain.pdb
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerage.Application.csproj.AssemblyReference.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerage.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerage.Application.AssemblyInfoInputs.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerage.Application.AssemblyInfo.cs
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerage.Application.csproj.CoreCompileInputs.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerage.Application.sourcelink.json
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerag.51A75A46.Up2Date
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerage.Application.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\refint\Brokerage.Application.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\Brokerage.Application.pdb
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\ref\Brokerage.Application.dll
