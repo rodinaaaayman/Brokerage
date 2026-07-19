@@ -2,53 +2,111 @@
 using Brokerage.DTOs;
 using Brokerage.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static Brokerage.Models.Orders;
 
 namespace Brokerage.Controllers
 {
-    
-        [ApiController]
-        [Route("api/[controller]")]
-        public class ExecutionsController : ControllerBase
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ExecutionsController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+
+        public ExecutionsController(AppDbContext context)
         {
-            private readonly AppDbContext _context;
+            _context = context;
+        }
 
-            public ExecutionsController(AppDbContext context)
+        [HttpPost]
+        public async Task<IActionResult> PostExecution(CreateExecutionDTO dto)
+        {
+            // Find the order
+            var order = await _context.Orders
+                .FirstOrDefaultAsync(o => o.OrderId == dto.OrderId);
+
+            if (order == null)
+                return NotFound("Order not found.");
+
+
+            // Prevent over-fill
+            if (order.FilledQuantity + dto.ExecutionQuantity > order.Quantity)
             {
-                _context = context;
+                return UnprocessableEntity(
+                    "Execution exceeds remaining quantity."
+                );
             }
 
-            [HttpPost]
-            public async Task<IActionResult> PostExecution(CreateExecutionDTO dto)
+
+            // Create execution
+            var execution = new Executions
             {
-                var order = await _context.Orders.FindAsync(dto.OrderId);
+                OrderId = dto.OrderId,
+                ExecutionQuantity = dto.ExecutionQuantity,
+                ExecutionDate = DateTime.UtcNow
+            };
 
-                if (order == null)
-                    return NotFound();
+            _context.Executions.Add(execution);
 
-                if (order.FilledQuantity + dto.ExecutionQuantity > order.Quantity)
-                    return UnprocessableEntity("Execution exceeds remaining quantity.");
 
-                var execution = new Executions
+            // Update filled quantity
+            order.FilledQuantity += dto.ExecutionQuantity;
+
+
+            // If completely filled
+            if (order.FilledQuantity == order.Quantity)
+            {
+                order.Status = OrderStatus.Filled;
+
+
+                // Check if invoice already exists
+                var invoiceExists = await _context.Invoices
+                    .AnyAsync(i => i.OrderId == order.OrderId);
+
+
+                // Create invoice only once
+                if (!invoiceExists)
                 {
-                    OrderId = dto.OrderId,
-                    ExecutionQuantity = dto.ExecutionQuantity,
-                    ExecutionDate = DateTime.UtcNow
-                };
+                    var tradeValue = order.Quantity * order.UnitPrice;
 
-                _context.Executions.Add(execution);
+                    var commission = tradeValue * order.CommissionRate;
 
-                order.FilledQuantity += dto.ExecutionQuantity;
+                    var tax = 0m;
+                    // TODO: replace with your tax calculation rule
 
-                if (order.FilledQuantity == order.Quantity)
-                    order.Status = OrderStatus.Filled;
-                else
-                    order.Status = OrderStatus.PartiallyFilled;
 
-                await _context.SaveChangesAsync();
+                    var invoice = new Invoice
+                    {
+                        OrderId = order.OrderId,
+                        TradeValue = tradeValue,
+                        Commission = commission,
+                        Tax = tax,
+                        Total = tradeValue + commission + tax,
+                        CreatedDate = DateTime.Now
+                    };
 
-                return Ok(execution);
+
+                    _context.Invoices.Add(invoice);
+                }
             }
+            else
+            {
+                order.Status = OrderStatus.PartiallyFilled;
+            }
+
+
+            await _context.SaveChangesAsync();
+
+
+            // Avoid circular reference problem
+            return Ok(new
+            {
+                execution.ExecutionId,
+                execution.OrderId,
+                execution.ExecutionQuantity,
+                execution.ExecutionDate,
+                OrderStatus = order.Status
+            });
         }
     }
-
+}

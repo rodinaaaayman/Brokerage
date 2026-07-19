@@ -14,17 +14,18 @@ namespace Brokerage.Data
         public DbSet<Admins> Admins { get; set; }
         public DbSet<Brokers> Brokers { get; set; }
         public DbSet<Executions> Executions { get; set; }
-
+        public DbSet<Invoice> Invoices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure Table-Per-Hierarchy inheritance for Users
-            //modelBuilder.Entity<Users>()
-            //    .HasDiscriminator<string>("UserType")
-            //    .HasValue<Users>("User")
-            //    .HasValue<Clients>("Client")
-            //    .HasValue<Admins>("Admin")
-            //    .HasValue<Brokers>("Broker");
+            modelBuilder.Entity<Orders>()
+                .HasOne(o => o.Invoice)
+                .WithOne(i => i.Order)
+                .HasForeignKey<Invoice>(i => i.OrderId);
+
+            modelBuilder.Entity<Invoice>()
+                .HasIndex(i => i.OrderId)
+                .IsUnique();
 
             modelBuilder.Entity<Clients>()
                 .HasIndex(c => c.Email)

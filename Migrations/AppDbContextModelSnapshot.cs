@@ -46,6 +46,40 @@ namespace Brokerage.Migrations
                     b.ToTable("Executions");
                 });
 
+            modelBuilder.Entity("Brokerage.Models.Invoice", b =>
+                {
+                    b.Property<int>("InvoiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvoiceId"));
+
+                    b.Property<decimal>("Commission")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Tax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TradeValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("InvoiceId");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Invoices");
+                });
+
             modelBuilder.Entity("Brokerage.Models.Orders", b =>
                 {
                     b.Property<int>("OrderId")
@@ -212,6 +246,17 @@ namespace Brokerage.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("Brokerage.Models.Invoice", b =>
+                {
+                    b.HasOne("Brokerage.Models.Orders", "Order")
+                        .WithOne("Invoice")
+                        .HasForeignKey("Brokerage.Models.Invoice", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Brokerage.Models.Orders", b =>
                 {
                     b.HasOne("Brokerage.Models.Clients", "Client")
@@ -268,6 +313,8 @@ namespace Brokerage.Migrations
             modelBuilder.Entity("Brokerage.Models.Orders", b =>
                 {
                     b.Navigation("Executions");
+
+                    b.Navigation("Invoice");
                 });
 
             modelBuilder.Entity("Brokerage.Models.Clients", b =>

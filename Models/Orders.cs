@@ -47,6 +47,8 @@ namespace Brokerage.Models
         [JsonIgnore]
         public Clients? Client { get; set; }
         public ICollection<Executions> Executions { get; set; } = new List<Executions>();
+        [JsonIgnore]
+        public Invoice? Invoice { get; set; }
     }
     public class CreateOrderDTOValidator : AbstractValidator<CreateOrdersDTO>
     {

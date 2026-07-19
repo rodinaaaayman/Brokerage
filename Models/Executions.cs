@@ -14,8 +14,8 @@ namespace Brokerage.Models
         [Required]
         [JsonIgnore]
         public Orders Order { get; set; } = null!;
-
-        public int ExecutionQuantity { get; set; } = 0;
+        [Required]
+        public int ExecutionQuantity { get; set; }
 
         public DateTime ExecutionDate { get; set; }
     }
