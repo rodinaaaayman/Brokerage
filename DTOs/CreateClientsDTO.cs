@@ -27,6 +27,5 @@ namespace Brokerage.DTOs
         public string PhoneNumber { get; set; } = string.Empty;
 
         public decimal Deposit { get; set; }
-        public string Role { get; private set; } = "Client";
     }
 }
