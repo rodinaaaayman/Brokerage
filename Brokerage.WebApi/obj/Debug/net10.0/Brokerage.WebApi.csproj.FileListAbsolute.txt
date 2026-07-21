@@ -1,12 +1,3 @@
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.csproj.AssemblyReference.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\rpswa.dswa.cache.json
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.AssemblyInfoInputs.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.AssemblyInfo.cs
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.csproj.CoreCompileInputs.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.sourcelink.json
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\appsettings.Development.json
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\appsettings.json
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\Brokerage.WebApi.staticwebassets.endpoints.json
@@ -21,6 +12,8 @@ C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\FluentValidation.AspNetCore.dll
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\Humanizer.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\MediatR.dll
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\MediatR.Contracts.dll
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -155,6 +148,15 @@ C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\Brokerage.Application.pdb
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\Brokerage.Infrastructure.pdb
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\bin\Debug\net10.0\Brokerage.Domain.pdb
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.csproj.AssemblyReference.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.AssemblyInfoInputs.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.AssemblyInfo.cs
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.csproj.CoreCompileInputs.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\Brokerage.WebApi.sourcelink.json
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.WebApi\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json

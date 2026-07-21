@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yPUo8qFiK/Q=",
+  "dgSpecHash": "EnRyADXdK5I=",
   "success": true,
   "projectFilePath": "C:\\Users\\Copy Center\\source\\repos\\Brokerage\\Brokerage\\Brokerage.WebApi\\Brokerage.WebApi.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,8 @@
     "C:\\Users\\Copy Center\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
     "C:\\Users\\Copy Center\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.1.1\\fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",
     "C:\\Users\\Copy Center\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Copy Center\\.nuget\\packages\\mediatr\\14.2.0\\mediatr.14.2.0.nupkg.sha512",
+    "C:\\Users\\Copy Center\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\Copy Center\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.10\\microsoft.aspnetcore.authentication.jwtbearer.10.0.10.nupkg.sha512",
     "C:\\Users\\Copy Center\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.10\\microsoft.aspnetcore.openapi.10.0.10.nupkg.sha512",
     "C:\\Users\\Copy Center\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",

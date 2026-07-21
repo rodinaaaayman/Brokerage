@@ -1,4 +1,6 @@
 using Brokerage.Application.FluentValidation;
+using Brokerage.Application.Interfaces;
+using Brokerage.Application.orders.Commands.PlaceOrder;
 using Brokerage.Data;
 using Brokerage.Models;
 using FluentValidation;
@@ -9,7 +11,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using Brokerage.Application.FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +24,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddValidatorsFromAssemblyContaining<OrdersFluentValidation>();
 builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+});
+builder.Services.AddMediatR(cfg =>
+    {
+        cfg.RegisterServicesFromAssembly(typeof(PlaceOrderCommand).Assembly);
+    });
+    builder.Services.AddScoped<IApplicationDbContext>(provider =>
+    provider.GetRequiredService<AppDbContext>());
 
 
-builder.Services.AddAuthorization();
+    builder.Services.AddAuthorization();
 
-var app = builder.Build();
+    var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -36,11 +47,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 ;
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
+    app.UseHttpsRedirection();
+    app.UseAuthorization();
+    app.MapControllers();
 
 
-app.Run();
+    app.Run();
 public partial class Program { }
 

@@ -1,14 +1,18 @@
-﻿using Brokerage.Data;
+﻿using Brokerage.Application.orders.Commands.PlaceOrder;
+using Brokerage.Application.Orders.Commands.CancelOrder;
+using Brokerage.Application.Orders.Queries.GetOrders;
+using Brokerage.Data;
 using Brokerage.DTOs;
 using Brokerage.Models;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace BrokerageFinal.Controllers
 {
@@ -16,26 +20,18 @@ namespace BrokerageFinal.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IMediator _mediator;
 
-        public OrdersController(AppDbContext context)
+        public OrdersController(IMediator mediator)
         {
-            _context = context;
+            _mediator = mediator;
         }
 
         // GET: api/Orders
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrdersDTO>>> GetOrders()
         {
-            var orders = await _context.Orders
-                .Select(o => new OrdersDTO
-                {
-                    OrderId = o.OrderId,
-                    Quantity = o.Quantity,
-                    UnitPrice = o.UnitPrice,
-                    ClientId = o.Id
-                })
-                .ToListAsync();
+            var orders = await _mediator.Send(new GetOrdersQuery());
 
             return Ok(orders);
         }
@@ -43,96 +39,48 @@ namespace BrokerageFinal.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Orders>> GetOrders(int id)
         {
-            var orders = await _context.Orders.FindAsync(id);
+            var order = await _mediator.Send(
+                new GetOrderByIdQuery(id));
 
-            if (orders == null)
-            {
-                return NotFound();
-            }
-
-            return orders;
-        }
-
-        // PUT: api/Orders/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrders(int id, Orders orders)
-        {
-            if (id != orders.OrderId)
-            {
-                return BadRequest();
-            }
-
-
-            _context.Entry(orders).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrdersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(order);
         }
 
         //POST: api/Orders
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Orders>> PostOrder(CreateOrdersDTO dto)
+        public async Task<IActionResult> PostOrder(CreateOrdersDTO dto)
         {
-            var client = await _context.Clients
-                .FirstOrDefaultAsync(c => c.Id == dto.Id && c.IsActive);
-
-
-            if (client == null)
-            {
-                return BadRequest("Invalid client ID.");
-            }
-
-            var order = new Orders
+            var command = new PlaceOrderCommand
             {
                 Id = dto.Id,
-                OrderType=dto.OrderType,
+                OrderType = dto.OrderType,
                 LimitPrice = dto.LimitPrice,
                 UnitPrice = dto.UnitPrice,
                 Quantity = dto.Quantity
             };
 
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+            var order = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetOrders), new { id = order.OrderId }, order);
+            return CreatedAtAction(nameof(GetOrders),
+                new { id = order.OrderId },
+                order);
         }
 
         // DELETE: api/Orders/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrders(int id)
         {
-            var orders = await _context.Orders.FindAsync(id);
-            if (orders == null)
+            var result = await _mediator.Send(
+                new CancelOrderCommand(id));
+
+
+            if (!result)
             {
                 return NotFound();
             }
 
-            _context.Orders.Remove(orders);
-            await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool OrdersExists(int id)
-        {
-            return _context.Orders.Any(e => e.OrderId == id);
         }
     }
 }
