@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using static Brokerage.Models.Orders;
 
+
 namespace Brokerage.Application.FluentValidation
 {
     public class OrdersFluentValidation
