@@ -1,10 +1,11 @@
 ﻿using Brokerage.Data;
 using Brokerage.DTOs;
+using Brokerage.Application.Events;
 using Brokerage.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static Brokerage.Models.Orders;
-
 namespace Brokerage.Controllers
 {
     [ApiController]
@@ -12,16 +13,18 @@ namespace Brokerage.Controllers
     public class ExecutionsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IMediator _mediator;
 
-        public ExecutionsController(AppDbContext context)
+        public ExecutionsController(
+            AppDbContext context,
+            IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
-
         [HttpPost]
         public async Task<IActionResult> PostExecution(CreateExecutionDTO dto)
         {
-            // Find the order
             var order = await _context.Orders
                 .FirstOrDefaultAsync(o => o.OrderId == dto.OrderId);
 
@@ -29,7 +32,7 @@ namespace Brokerage.Controllers
                 return NotFound("Order not found.");
 
 
-            // Prevent over-fill
+            // overfilling check
             if (order.FilledQuantity + dto.ExecutionQuantity > order.Quantity)
             {
                 return UnprocessableEntity(
@@ -54,41 +57,15 @@ namespace Brokerage.Controllers
 
 
             // If completely filled
-            if (order.FilledQuantity == order.Quantity)
-            {
-                order.Status = OrderStatus.Filled;
-
-
-                // Check if invoice already exists
-                var invoiceExists = await _context.Invoices
-                    .AnyAsync(i => i.OrderId == order.OrderId);
-
-
-                // Create invoice only once
-                if (!invoiceExists)
+            
+                if (order.FilledQuantity == order.Quantity)
                 {
-                    var tradeValue = order.Quantity * order.UnitPrice;
+                    order.Status = OrderStatus.Filled;
 
-                    var commission = tradeValue * order.CommissionRate;
-
-                    var tax = 0m;
-                    // TODO: replace with your tax calculation rule
-
-
-                    var invoice = new Invoice
-                    {
-                        OrderId = order.OrderId,
-                        TradeValue = tradeValue,
-                        Commission = commission,
-                        Tax = tax,
-                        Total = tradeValue + commission + tax,
-                        CreatedDate = DateTime.Now
-                    };
-
-
-                    _context.Invoices.Add(invoice);
+                    await _mediator.Publish(
+                        new OrderFullyFilledEvent(order.OrderId)
+                    );
                 }
-            }
             else
             {
                 order.Status = OrderStatus.PartiallyFilled;

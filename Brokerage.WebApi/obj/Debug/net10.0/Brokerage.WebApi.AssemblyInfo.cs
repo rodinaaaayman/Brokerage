@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Brokerage.WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0083ce81a6d80e9e4a0308df976360478babcdef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+306c537c8c4de73974ad116ad0869731fd130d54")]
 [assembly: System.Reflection.AssemblyProductAttribute("Brokerage.WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Brokerage.WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

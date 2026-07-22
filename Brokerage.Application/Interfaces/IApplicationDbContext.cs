@@ -9,7 +9,10 @@ namespace Brokerage.Application.Interfaces
     public interface IApplicationDbContext
     {
         DbSet<Clients> Clients { get; }
-        DbSet<Brokerage.Models.Orders> Orders { get; }
+        DbSet<Orders> Orders { get; }
+        DbSet <Executions> Executions { get; }
+        DbSet<Invoice> Invoices { get; }
+
 
         Task<int> SaveChangesAsync(
             CancellationToken cancellationToken);

@@ -1,0 +1,69 @@
+﻿using Brokerage.Application.Events;
+using Brokerage.Application.Interfaces;
+using Brokerage.Models;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+namespace Brokerage.Application.Services.invoices
+{
+    
+
+    public class InvoiceGenerationHandler
+        : INotificationHandler<OrderFullyFilledEvent>
+    {
+        private readonly IApplicationDbContext _context;
+
+        public InvoiceGenerationHandler(IApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
+        public async Task Handle(
+            OrderFullyFilledEvent notification,
+            CancellationToken cancellationToken)
+        {
+            var order = await _context.Orders
+                .FirstOrDefaultAsync(
+                    o => o.OrderId == notification.OrderId,
+                    cancellationToken);
+
+
+            if (order == null)
+                return;
+
+
+            // prevent duplicate invoices
+            var exists = await _context.Invoices
+                .AnyAsync(
+                    i => i.OrderId == order.OrderId,
+                    cancellationToken);
+
+
+            if (exists)
+                return;
+
+
+            var tradeValue = order.Quantity * order.UnitPrice;
+
+            var commission = tradeValue * order.CommissionRate;
+
+            var invoice = new Invoice
+            {
+                OrderId = order.OrderId,
+                TradeValue = tradeValue,
+                Commission = commission,
+                Tax = 0m,
+                Total = tradeValue + commission,
+                CreatedDate = DateTime.UtcNow
+            };
+
+
+            _context.Invoices.Add(invoice);
+
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+    }
+}
