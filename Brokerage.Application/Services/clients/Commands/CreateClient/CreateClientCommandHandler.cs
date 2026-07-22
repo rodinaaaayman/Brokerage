@@ -4,6 +4,7 @@ using System.Text;
 using Brokerage.Application.Interfaces;
     using Brokerage.Models;
     using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Brokerage.Application.Services.clients.Commands.CreateClient
 {
@@ -25,30 +26,29 @@ namespace Brokerage.Application.Services.clients.Commands.CreateClient
             CreateClientCommand request,
             CancellationToken cancellationToken)
         {
-
-            var dto = request.Client;
-
+            if (await _context.Clients.AnyAsync(
+        c => c.Email == request.Email,
+        cancellationToken))
+            {
+                throw new InvalidOperationException("Email already exists.");
+            }
 
             var client = new Clients
             {
-                Username = dto.Username,
-                Name = dto.Name,
-                Email = dto.Email,
-                Password = dto.Password,
-                NationalID = dto.NationalID,
-                PhoneNumber = dto.PhoneNumber,
+                Username = request.Username,
+                Name = request.Name,
+                Email = request.Email,
+                Password = request.Password,
+                NationalID = request.NationalID,
+                PhoneNumber = request.PhoneNumber,
                 Role = "Client"
             };
 
-
-            client.Deposit(dto.Deposit);
-
+            client.Deposit(request.Deposit);
 
             _context.Clients.Add(client);
 
-
             await _context.SaveChangesAsync(cancellationToken);
-
 
             return client.Id;
         }

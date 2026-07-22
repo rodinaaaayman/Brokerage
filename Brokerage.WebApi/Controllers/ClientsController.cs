@@ -81,15 +81,18 @@ namespace Brokerage.Controllers
         [HttpPost]
         public async Task<IActionResult> PostClients(CreateClientsDTO dto)
         {
+            var command = new CreateClientCommand(
+                dto.Username!,
+                dto.Name!,
+                dto.Email,
+                dto.Password,
+                dto.NationalID,
+                dto.PhoneNumber,
+                dto.Deposit);
 
-            var id = await _mediator.Send(
-                new CreateClientCommand(dto));
+            var id = await _mediator.Send(command);
 
-
-            return CreatedAtAction(
-                nameof(GetClient),
-                new { id },
-                id);
+            return CreatedAtAction(nameof(GetClient), new { id }, id);
         }
         // DELETE: api/Clients/5
         [HttpDelete("{id}")]
