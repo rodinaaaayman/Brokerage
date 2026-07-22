@@ -1,6 +1,0 @@
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\BrokerageApplication.csproj.AssemblyReference.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\BrokerageApplication.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\BrokerageApplication.AssemblyInfoInputs.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\BrokerageApplication.AssemblyInfo.cs
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\BrokerageApplication.csproj.CoreCompileInputs.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\Brokerage.Application\obj\Debug\net10.0\BrokerageApplication.sourcelink.json

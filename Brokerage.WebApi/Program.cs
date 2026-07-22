@@ -3,6 +3,7 @@ using Brokerage.Application.Interfaces;
 using Brokerage.Application.orders.Commands.PlaceOrder;
 using Brokerage.Data;
 using Brokerage.Models;
+using Brokerage.WebApi.ExceptionHandlers;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,27 +30,32 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
 });
 builder.Services.AddMediatR(cfg =>
-    {
+    { 
         cfg.RegisterServicesFromAssembly(typeof(PlaceOrderCommand).Assembly);
     });
-    builder.Services.AddScoped<IApplicationDbContext>(provider =>
+builder.Services.AddScoped<IApplicationDbContext>(provider =>
     provider.GetRequiredService<AppDbContext>());
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 
-    builder.Services.AddAuthorization();
+builder.Services.AddAuthorization();
 
-    var app = builder.Build();
+var app = builder.Build();
+app.UseExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
-;
-    app.UseHttpsRedirection();
-    app.UseAuthorization();
-    app.MapControllers();
+};
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+
+app.MapControllers();
+
 
 
     app.Run();

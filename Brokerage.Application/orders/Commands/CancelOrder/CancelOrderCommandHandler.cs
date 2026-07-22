@@ -1,6 +1,8 @@
 ﻿using Brokerage.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using static Brokerage.Models.Orders;
+using static System.Net.WebRequestMethods;
 
 namespace Brokerage.Application.Orders.Commands.CancelOrder;
 
@@ -27,6 +29,9 @@ public class CancelOrderCommandHandler
 
         if (order == null)
         {
+            return false;
+        }
+        if (order.Status == OrderStatus.Filled) {
             return false;
         }
 

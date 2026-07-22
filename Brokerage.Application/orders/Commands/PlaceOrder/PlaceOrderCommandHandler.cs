@@ -27,7 +27,7 @@ namespace Brokerage.Application.orders.Commands.PlaceOrder
         .FirstOrDefaultAsync(c => c.Id == request.Id && c.IsActive);
             if (client == null)
             {
-                throw new Exception("Invalid client.");
+                throw new KeyNotFoundException("Invalid client.");
             }
 
             var order = new Brokerage.Models.Orders

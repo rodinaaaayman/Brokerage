@@ -13,8 +13,7 @@ namespace Brokerage.Models
         [StringLength(15)]
         public string PhoneNumber { get; set; } = string.Empty;
 
-        private decimal accountBalance;
-        public Decimal AccountBalance { get => accountBalance; set => accountBalance = value; }
+        public Decimal AccountBalance { get ; set; }
         public void Deposit(decimal amount) { AccountBalance += amount; }
         public void Withdraw(decimal amount) { AccountBalance -= amount; }
         public bool IsActive { get; set; } = true;

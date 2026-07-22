@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Brokerage.WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d47787564b7243311fcf536d62276018e522b22e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01238a31b49d8ec07e0ecc5a0035f3d8f06526e7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Brokerage.WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Brokerage.WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

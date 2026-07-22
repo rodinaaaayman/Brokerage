@@ -1,9 +1,0 @@
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\Brokerage.csproj.AssemblyReference.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\rpswa.dswa.cache.json
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\Brokerage.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\Brokerage.AssemblyInfoInputs.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\Brokerage.AssemblyInfo.cs
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\Brokerage.csproj.CoreCompileInputs.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\Brokerage.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\Brokerage.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Copy Center\source\repos\Brokerage\Brokerage\obj\Debug\net10.0\Brokerage.sourcelink.json
