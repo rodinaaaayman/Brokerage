@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Brokerage.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bd3de6e7ddbfebc0ff956fcc722b64f6645a77f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0083ce81a6d80e9e4a0308df976360478babcdef")]
 [assembly: System.Reflection.AssemblyProductAttribute("Brokerage.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Brokerage.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

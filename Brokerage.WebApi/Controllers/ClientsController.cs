@@ -1,5 +1,11 @@
-﻿using Brokerage.Application.Services.clients.Queries;
+﻿using Brokerage.Application.DTOs;
+using Brokerage.Application.Services.clients.Commands.CreateClient;
+using Brokerage.Application.Services.clients.Commands.DeleteClient;
+using Brokerage.Application.Services.clients.Commands.UpdateClient;
+using Brokerage.Application.Services.clients.Queries;
+using Brokerage.Application.Services.clients.Queries.GetClientById;
 using Brokerage.Application.Services.clients.Queries.GetClientOrders;
+using Brokerage.Application.Services.clients.Queries.GetClients;
 using Brokerage.Data;
 using Brokerage.DTOs;
 using Brokerage.Models;
@@ -26,128 +32,81 @@ namespace Brokerage.Controllers
             _mediator = mediator;
         }
 
-        //// GET: api/Clients
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<ClientsDTO>>> GetClients()
-        //{
-        //    var clients = await _context.Clients
-        //        .Where(c => c.IsActive)
-        //        .Select(c => new ClientsDTO
-        //        {
-        //            Id = c.Id,
-        //            Name = c.Name,
-        //            Email = c.Email,
-        //            NationalID = c.NationalID,
-        //            PhoneNumber = c.PhoneNumber,
-        //            AccountBalance = c.AccountBalance
-        //        })
-        //        .ToListAsync();
+        // GET: api/Clients
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ClientsDTO>>> GetClients()
+        {
+            var clients = await _mediator.Send(new GetClientsQuery());
 
-        //    return Ok(clients);
-        //}
+            return Ok(clients);
+        }
 
-        //// GET: api/Clients/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<ClientsDTO>> GetClients(int id)
-        //{
-        //    var client = await _context.Clients
-        //        .Where(c => c.Id == id && c.IsActive)
-        //        .Select(c => new ClientsDTO
-        //        {
-        //            Id = c.Id,
-        //            Name = c.Name,
-        //            Email = c.Email,
-        //            NationalID = c.NationalID,
-        //            PhoneNumber = c.PhoneNumber,
-        //            AccountBalance = c.AccountBalance
-        //        })
-        //        .FirstOrDefaultAsync();
+        // GET: api/Clients/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ClientsDTO>> GetClient(int id)
+        {
+            var client = await _mediator.Send(new GetClientByIdQuery(id));
 
-        //    if (client == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return Ok(client);
-        //}
+            if (client == null)
+            {
+                return NotFound();
+            }
 
-        //// PUT: api/Clients/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutClients(int id, Clients clients)
-        //{
-        //    if (id != clients.Id)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _context.Entry(clients).State = EntityState.Modified;
+            return Ok(client);
+        }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ClientsExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+        // PUT: api/Clients/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutClient(
+     int id,
+     UpdateClientDTO dto)
+        {
 
-        //    return NoContent();
-        //}
+            var result = await _mediator.Send(
+                new UpdateClientCommand(id, dto));
 
-        //// POST: api/Clients
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Clients>> PostClients(CreateClientsDTO dto)
-        //{
-        //    var client = new Clients
-        //    {
-        //        Username = dto. Username,
-        //        Name = dto.Name,
-        //        Email = dto.Email,
-        //        Password = dto.Password,
-        //        NationalID = dto.NationalID,
-        //        PhoneNumber = dto.PhoneNumber,
-        //        Role = "Client"
-        //    };
 
-        //    client.Deposit(dto.Deposit);
+            if (!result)
+            {
+                return NotFound();
+            }
 
-        //    _context.Clients.Add(client);
-        //    await _context.SaveChangesAsync();
 
-        //    return CreatedAtAction(nameof(GetClients), new { id = client.Id }, client);
-        //}
+            return NoContent();
+        }
 
-        //// DELETE: api/Clients/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteClients(int id)
-        //{
-        //    var client = await _context.Clients.FindAsync(id);
+        // POST: api/Clients
+        [HttpPost]
+        public async Task<IActionResult> PostClients(CreateClientsDTO dto)
+        {
 
-        //    if (client == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var id = await _mediator.Send(
+                new CreateClientCommand(dto));
 
-        //    // Soft delete
-        //    client.IsActive = false;
 
-        //    await _context.SaveChangesAsync();
+            return CreatedAtAction(
+                nameof(GetClient),
+                new { id },
+                id);
+        }
+        // DELETE: api/Clients/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteClient(int id)
+        {
+            var result = await _mediator.Send(
+                new DeleteClientCommand(id));
 
-        //    return NoContent();
-        //}
-        //private bool ClientsExists(int id)
-        //{
-        //    return _context.Clients.Any(e => e.Id == id);
-        //}
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+
+            return NoContent();
+        }
         //Get Client's Orders
         [HttpGet("{clientId}/orders")]
         public async Task<IActionResult> GetClientOrders(int clientId)
