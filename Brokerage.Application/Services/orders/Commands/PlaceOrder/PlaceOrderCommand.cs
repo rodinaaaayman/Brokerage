@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using System;
-using MediatR;
 using static Brokerage.Models.Orders;
 
 namespace Brokerage.Application.Services.orders.Commands.PlaceOrder;

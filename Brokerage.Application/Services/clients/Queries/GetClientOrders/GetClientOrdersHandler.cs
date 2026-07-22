@@ -1,12 +1,8 @@
 ﻿using Brokerage.Application.Interfaces;
 using Brokerage.Application.Services.clients.Queries.GetClientOrders;
-using Brokerage.DTOs;
-using global::Brokerage.Application.DTOs;
+using Brokerage.Application.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 namespace Brokerage.Application.Services.clients.Queries
 {
     

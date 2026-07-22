@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using static Brokerage.Models.Orders;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Brokerage.Application.DTOs
 {

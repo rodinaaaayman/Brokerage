@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Brokerage.Application.Interfaces;
-    using global::Brokerage.Application.Interfaces;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
+﻿using Brokerage.Application.Interfaces;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Brokerage.Application.Services.clients.Commands.UpdateClient;
 

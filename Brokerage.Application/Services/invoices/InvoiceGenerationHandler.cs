@@ -3,9 +3,6 @@ using Brokerage.Application.Interfaces;
 using Brokerage.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 namespace Brokerage.Application.Services.invoices
 {
     

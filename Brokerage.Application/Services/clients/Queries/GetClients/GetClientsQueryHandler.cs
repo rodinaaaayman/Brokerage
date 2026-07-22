@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Brokerage.Application.DTOs;
-using Brokerage.Application.Interfaces;
+﻿using Brokerage.Application.Interfaces;
 using global::Brokerage.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

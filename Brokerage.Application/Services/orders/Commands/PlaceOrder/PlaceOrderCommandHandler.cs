@@ -1,5 +1,4 @@
 ﻿using Brokerage.Application.Interfaces;
-using Brokerage.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
-
-namespace Brokerage.Application.DTOs
+﻿namespace Brokerage.Application.DTOs
 {
     public class UpdateClientDTO
     {

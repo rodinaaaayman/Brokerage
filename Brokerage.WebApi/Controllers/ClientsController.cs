@@ -1,23 +1,13 @@
 ﻿using Brokerage.Application.DTOs;
-using Brokerage.Application.Services.clients.Commands.CreateClient;
 using Brokerage.Application.Services.clients.Commands.DeleteClient;
 using Brokerage.Application.Services.clients.Commands.UpdateClient;
-using Brokerage.Application.Services.clients.Queries;
 using Brokerage.Application.Services.clients.Queries.GetClientById;
 using Brokerage.Application.Services.clients.Queries.GetClientOrders;
 using Brokerage.Application.Services.clients.Queries.GetClients;
-using Brokerage.Data;
 using Brokerage.DTOs;
-using Brokerage.Models;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+
 
 namespace Brokerage.Controllers
 {

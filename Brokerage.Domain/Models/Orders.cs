@@ -1,9 +1,7 @@
-﻿using FluentValidation;
-using System.CodeDom.Compiler;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using static Brokerage.Models.Orders;   
+ 
 
 namespace Brokerage.Models
 {

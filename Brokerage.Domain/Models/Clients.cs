@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Brokerage.Models
+﻿namespace Brokerage.Models
 {
     public class Clients : Users
     {

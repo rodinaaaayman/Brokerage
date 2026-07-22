@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using static Brokerage.Models.Orders;
-using static System.Net.WebRequestMethods;
 
 namespace Brokerage.Application.Services.orders.Commands.CancelOrder;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Brokerage.Application.Interfaces;
+﻿using Brokerage.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

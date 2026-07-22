@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Brokerage.Application.Interfaces;
-    using Brokerage.Models;
-    using MediatR;
+﻿using Brokerage.Application.Interfaces;
+using Brokerage.Models;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Brokerage.Application.Services.clients.Commands.CreateClient
@@ -31,6 +28,13 @@ namespace Brokerage.Application.Services.clients.Commands.CreateClient
         cancellationToken))
             {
                 throw new InvalidOperationException("Email already exists.");
+            }
+
+            if (await _context.Clients.AnyAsync(
+        c => c.NationalID == request.NationalID,
+        cancellationToken))
+            {
+                throw new InvalidOperationException("National ID already exists.");
             }
 
             var client = new Clients
