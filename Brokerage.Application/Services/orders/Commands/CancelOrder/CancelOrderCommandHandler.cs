@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using static Brokerage.Models.Orders;
 using static System.Net.WebRequestMethods;
 
-namespace Brokerage.Application.Orders.Commands.CancelOrder;
+namespace Brokerage.Application.Services.orders.Commands.CancelOrder;
 
 public class CancelOrderCommandHandler
     : IRequestHandler<CancelOrderCommand, bool>

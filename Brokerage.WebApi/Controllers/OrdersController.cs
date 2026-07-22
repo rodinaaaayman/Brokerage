@@ -1,6 +1,6 @@
-﻿using Brokerage.Application.orders.Commands.PlaceOrder;
-using Brokerage.Application.Orders.Commands.CancelOrder;
-using Brokerage.Application.Orders.Queries.GetOrders;
+﻿using Brokerage.Application.Services.orders.Commands.PlaceOrder;
+using Brokerage.Application.Services.orders.Commands.CancelOrder;
+using Brokerage.Application.Services.orders.Queries.GetOrders;
 using Brokerage.Data;
 using Brokerage.DTOs;
 using Brokerage.Models;

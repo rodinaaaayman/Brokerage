@@ -15,6 +15,14 @@
     <ProjectReference Include="..\Brokerage.Domain\Brokerage.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\clients\Commands\CreateClient\" />
+    <Folder Include="Services\clients\Commands\DeleteClient\" />
+    <Folder Include="Services\clients\Commands\UpdateClient\" />
+    <Folder Include="Services\clients\Queries\GetClients\" />
+    <Folder Include="Services\clients\Queries\GetClientById\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

@@ -1,15 +1,14 @@
 ﻿using Brokerage.Application.Interfaces;
-using Brokerage.Application.orders.Commands.PlaceOrder;
 using Brokerage.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Brokerage.Application.orders.Commands.PlaceOrder
+namespace Brokerage.Application.Services.orders.Commands.PlaceOrder
 {
 
 
     public class PlaceOrderCommandHandler
-        : IRequestHandler<PlaceOrderCommand, Brokerage.Models.Orders>
+        : IRequestHandler<PlaceOrderCommand, Models.Orders>
     {
         
         private readonly IApplicationDbContext _context;
@@ -18,7 +17,7 @@ namespace Brokerage.Application.orders.Commands.PlaceOrder
         {
             _context = context;
         }
-        public async Task<Brokerage.Models.Orders> Handle(
+        public async Task<Models.Orders> Handle(
             PlaceOrderCommand request,
             CancellationToken cancellationToken)
         {
@@ -29,20 +28,17 @@ namespace Brokerage.Application.orders.Commands.PlaceOrder
             {
                 throw new KeyNotFoundException("Invalid client.");
             }
-
-            var order = new Brokerage.Models.Orders
+        
+            var order = new Models.Orders
             {
                 Id = request.Id,
                 OrderType = request.OrderType,
                 LimitPrice = request.LimitPrice,
                 UnitPrice = request.UnitPrice,
                 Quantity = request.Quantity
+                
             };
-            if (client.AccountBalance < order.GrossAmount)
-            {
-                throw new Exception("Insufficient balance.");
-            }
-
+            client.Withdraw(order.GrossAmount);
             client.AccountBalance -= order.GrossAmount;
             _context.Orders.Add(order);
             await _context.SaveChangesAsync(CancellationToken.None);

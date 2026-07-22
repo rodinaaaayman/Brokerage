@@ -3,7 +3,7 @@ using System;
 using MediatR;
 using static Brokerage.Models.Orders;
 
-namespace Brokerage.Application.orders.Commands.PlaceOrder;
+namespace Brokerage.Application.Services.orders.Commands.PlaceOrder;
 
 public class PlaceOrderCommand : IRequest<Models.Orders>
 {

@@ -1,10 +1,9 @@
 ﻿using Brokerage.Application.Interfaces;
-using Brokerage.Application.Orders.Queries.GetOrders;
 using Brokerage.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Brokerage.Application.Queries.Orders.GetOrders;
+namespace Brokerage.Application.Services.orders.Queries.GetOrders;
 
 public class GetOrdersQueryHandler
     : IRequestHandler<GetOrdersQuery, IEnumerable<OrdersDTO>>

@@ -1,6 +1,6 @@
-﻿ using MediatR;
+﻿using MediatR;
 
-    namespace Brokerage.Application.Orders.Commands.CancelOrder;
+namespace Brokerage.Application.Services.orders.Commands.CancelOrder;
 
     public class CancelOrderCommand : IRequest<bool>
     {

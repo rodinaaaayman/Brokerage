@@ -15,7 +15,15 @@ namespace Brokerage.Models
 
         public Decimal AccountBalance { get ; set; }
         public void Deposit(decimal amount) { AccountBalance += amount; }
-        public void Withdraw(decimal amount) { AccountBalance -= amount; }
+        public void Withdraw(decimal amount)
+        {
+            if (AccountBalance < amount)
+            {
+                throw new InvalidOperationException("Insufficient balance.");
+            }
+
+            AccountBalance -= amount;
+        }
         public bool IsActive { get; set; } = true;
 
         public ICollection<Orders> Orders { get; set; } = new List<Orders>();

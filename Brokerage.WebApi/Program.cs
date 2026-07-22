@@ -1,6 +1,6 @@
 using Brokerage.Application.FluentValidation;
 using Brokerage.Application.Interfaces;
-using Brokerage.Application.orders.Commands.PlaceOrder;
+using Brokerage.Application.Services.orders.Commands.PlaceOrder;
 using Brokerage.Data;
 using Brokerage.Models;
 using Brokerage.WebApi.ExceptionHandlers;
