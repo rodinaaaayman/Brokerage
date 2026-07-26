@@ -1,3 +1,4 @@
+using Brokerage.Application.Behaviors;
 using Brokerage.Application.FluentValidation;
 using Brokerage.Application.Interfaces;
 using Brokerage.Application.Services.orders.Commands.PlaceOrder;
@@ -37,6 +38,14 @@ builder.Services.AddScoped<IApplicationDbContext>(provider =>
     provider.GetRequiredService<AppDbContext>());
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(CreateClientCommand).Assembly);
+
+    cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+});
 
 
 builder.Services.AddAuthorization();

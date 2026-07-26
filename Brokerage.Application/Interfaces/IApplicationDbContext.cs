@@ -1,5 +1,6 @@
 ﻿using Brokerage.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 
 namespace Brokerage.Application.Interfaces
@@ -10,7 +11,7 @@ namespace Brokerage.Application.Interfaces
         DbSet<Orders> Orders { get; }
         DbSet <Executions> Executions { get; }
         DbSet<Invoice> Invoices { get; }
-
+        DatabaseFacade Database { get; }
 
         Task<int> SaveChangesAsync(
             CancellationToken cancellationToken);
