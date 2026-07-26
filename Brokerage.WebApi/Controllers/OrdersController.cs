@@ -22,11 +22,11 @@ namespace BrokerageFinal.Controllers
 
         // GET: api/Orders
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrdersDTO>>> GetOrders()
+        public async Task<IActionResult> GetOrders(
+    [FromQuery] int? cursor,
+    [FromQuery] int limit = 20)
         {
-            var orders = await _mediator.Send(new GetOrdersQuery());
-
-            return Ok(orders);
+            return Ok(await _mediator.Send(new GetOrdersQuery(cursor, limit)));
         }
         // GET: api/Orders/5
         [HttpGet("{id}")]
