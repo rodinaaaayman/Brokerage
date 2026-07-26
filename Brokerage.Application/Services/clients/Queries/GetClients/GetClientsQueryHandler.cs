@@ -24,6 +24,7 @@ namespace Brokerage.Application.Services.clients.Queries.GetClients
                 .Where(c => c.IsActive)
                 .Select(c => new ClientsDTO
                 {
+                    Username = c.Username,
                     Id = c.Id,
                     Name = c.Name,
                     Email = c.Email,

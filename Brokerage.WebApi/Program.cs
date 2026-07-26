@@ -46,6 +46,7 @@ builder.Services.AddMediatR(cfg =>
     cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
     cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
 });
+builder.Services.AddMemoryCache();
 
 
 builder.Services.AddAuthorization();
