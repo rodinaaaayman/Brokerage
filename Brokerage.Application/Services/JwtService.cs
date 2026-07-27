@@ -20,11 +20,6 @@ public class JwtService : IJwtService
     {
         var claims = new[]
         {
-            //new Claim("UserId", User.Id.ToString()),
-            //new Claim(ClaimTypes.Role, User.Role.ToString()),
-            //new Claim(JwtRegisteredClaimNames.Name, User.Username)
-            
-
              new Claim(
                  ClaimTypes.NameIdentifier,
                  User.Id.ToString()),

@@ -19,10 +19,10 @@ namespace Brokerage.Application.FluentValidation
                     .When(x => x.OrderType == OrderTypes.Limit)
                     .WithMessage("Limit Price is required and must be greater than 0 for Limit orders.");
 
-                RuleFor(x => x.LimitPrice)
-                    .Null()
-                    .When(x => x.OrderType != OrderTypes.Limit)
-                    .WithMessage("Limit Price can only be specified for Limit orders.");
+                //RuleFor(x => x.LimitPrice)
+                //    .Null()
+                //    .When(x => x.OrderType != OrderTypes.Limit)
+                //    .WithMessage("Limit Price can only be specified for Limit orders.");
                 
             }
         }

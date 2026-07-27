@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Brokerage.Application.Interfaces;
-using Microsoft.AspNetCore.Http;
 
 namespace Brokerage.WebApi.Services;
 
