@@ -19,6 +19,10 @@ namespace Brokerage.Models
         [Required]
         public string Password { get; set; } = string.Empty;
         [Required]
-        public string Role { get; set; } 
+        public string Role { get; set; } = "Client";
+
+        public string? RefreshToken { get; set; }
+
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }

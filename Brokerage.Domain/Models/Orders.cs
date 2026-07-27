@@ -24,13 +24,13 @@ namespace Brokerage.Models
         public int Quantity { get; set; }
         public int FilledQuantity { get; set; } = 0;
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public decimal NetAmount { get; private set; }
+        public decimal NetAmount => UnitPrice*Quantity;
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public decimal Commission { get; private set; }
+        public decimal Commission => CommissionRate*NetAmount;
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public decimal GrossAmount { get; private set; }
+        public decimal GrossAmount => NetAmount + Commission;
         public decimal CommissionRate { get; set; } = 0.005m;
         public enum OrderStatus
         {

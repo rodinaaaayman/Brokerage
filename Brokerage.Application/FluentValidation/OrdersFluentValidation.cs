@@ -1,5 +1,7 @@
 ﻿using Brokerage.DTOs;
+using Brokerage.Models;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using static Brokerage.Models.Orders;
 
 
@@ -21,6 +23,7 @@ namespace Brokerage.Application.FluentValidation
                     .Null()
                     .When(x => x.OrderType != OrderTypes.Limit)
                     .WithMessage("Limit Price can only be specified for Limit orders.");
+                
             }
         }
     }

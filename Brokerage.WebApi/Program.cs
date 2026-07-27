@@ -47,6 +47,28 @@ builder.Services.AddMediatR(cfg =>
     cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
 });
 builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services
+.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters =
+        new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidateLifetime = true,
+
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+
+            IssuerSigningKey =
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+        };
+});
 
 
 builder.Services.AddAuthorization();
@@ -62,6 +84,7 @@ if (app.Environment.IsDevelopment())
 };
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

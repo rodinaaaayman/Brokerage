@@ -33,19 +33,19 @@ namespace Brokerage.Data
             modelBuilder.Entity<Clients>()
                 .HasIndex(c => c.NationalID)
                 .IsUnique();
-            modelBuilder.Entity<Orders>()
-                .Property(o => o.NetAmount)
-                .HasComputedColumnSql("[Quantity] * [UnitPrice]", true);
+            //modelBuilder.Entity<Orders>()
+            //    .Property(o => o.NetAmount)
+            //    .HasComputedColumnSql("[Quantity] * [UnitPrice]", true);
 
 
-            modelBuilder.Entity<Orders>()
-                .Property(o => o.Commission)
-                .HasComputedColumnSql("([Quantity] * [UnitPrice]) * [CommissionRate] / 100", true);
+            //modelBuilder.Entity<Orders>()
+            //    .Property(o => o.Commission)
+            //    .HasComputedColumnSql("([Quantity] * [UnitPrice]) * [CommissionRate] / 100", true);
 
 
-            modelBuilder.Entity<Orders>()
-                .Property(o => o.GrossAmount)
-                .HasComputedColumnSql("([Quantity] * [UnitPrice]) + (([Quantity] * [UnitPrice]) * [CommissionRate] / 100)", true);
+            //modelBuilder.Entity<Orders>()
+            //    .Property(o => o.GrossAmount)
+            //    .HasComputedColumnSql("([Quantity] * [UnitPrice]) + (([Quantity] * [UnitPrice]) * [CommissionRate] / 100)", true);
 
             modelBuilder.Entity<Users>()
                 .ToTable("Users");

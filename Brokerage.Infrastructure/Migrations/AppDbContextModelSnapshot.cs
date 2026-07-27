@@ -88,32 +88,17 @@ namespace Brokerage.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<decimal>("Commission")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("decimal(18,2)")
-                        .HasComputedColumnSql("([Quantity] * [UnitPrice]) * [CommissionRate] / 100", true);
-
                     b.Property<decimal>("CommissionRate")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("FilledQuantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("GrossAmount")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("decimal(18,2)")
-                        .HasComputedColumnSql("([Quantity] * [UnitPrice]) + (([Quantity] * [UnitPrice]) * [CommissionRate] / 100)", true);
-
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<decimal>("LimitPrice")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("NetAmount")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("decimal(18,2)")
-                        .HasComputedColumnSql("[Quantity] * [UnitPrice]", true);
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -154,6 +139,12 @@ namespace Brokerage.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -211,19 +202,15 @@ namespace Brokerage.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NationalID")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasIndex("Email")
                         .IsUnique();

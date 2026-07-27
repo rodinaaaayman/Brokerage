@@ -27,7 +27,8 @@ namespace Brokerage.Application.Services.orders.Commands.PlaceOrder
             {
                 throw new KeyNotFoundException("Invalid client.");
             }
-        
+            
+
             var order = new Models.Orders
             {
                 Id = request.Id,
@@ -37,7 +38,11 @@ namespace Brokerage.Application.Services.orders.Commands.PlaceOrder
                 Quantity = request.Quantity
                 
             };
-            client.Withdraw(order.GrossAmount);
+            if (client.AccountBalance < order.GrossAmount)
+            {
+                throw new InvalidOperationException("Insufficient balance.");
+         
+            }
             client.AccountBalance -= order.GrossAmount;
             _context.Orders.Add(order);
             await _context.SaveChangesAsync(CancellationToken.None);
