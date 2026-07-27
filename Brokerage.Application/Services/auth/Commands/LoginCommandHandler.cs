@@ -26,25 +26,24 @@ namespace Brokerage.Application.Services.auth.Commands
             LoginCommand request,
             CancellationToken cancellationToken)
         {
-            var client = await _context.Clients
+            var user = await _context.Users
                 .FirstOrDefaultAsync(x =>
                     x.Email == request.Email);
 
-            if (client == null)
+            if (user == null)
                 throw new Exception("Invalid credentials.");
 
-            if (client.Password != request.Password)
+            if (user.Password != request.Password)
                 throw new Exception("Invalid credentials.");
 
             var accessToken =
-                _jwt.GenerateAccessToken(client);
-
+                _jwt.GenerateAccessToken(user);     
             var refreshToken =
                 _jwt.GenerateRefreshToken();
 
-            client.RefreshToken = refreshToken;
+            user.RefreshToken = refreshToken;
 
-            client.RefreshTokenExpiryTime =
+            user.RefreshTokenExpiryTime =
                 DateTime.UtcNow.AddDays(7);
 
             await _context.SaveChangesAsync(cancellationToken);

@@ -16,14 +16,26 @@ public class JwtService : IJwtService
         _configuration = configuration;
     }
 
-    public string GenerateAccessToken(Clients client)
+    public string GenerateAccessToken(Users User)
     {
         var claims = new[]
         {
-            new Claim("ClientId", client.Id.ToString()),
-            new Claim(ClaimTypes.Role, "Client"),
-            new Claim(JwtRegisteredClaimNames.Name, client.Username)
-        };
+            //new Claim("UserId", User.Id.ToString()),
+            //new Claim(ClaimTypes.Role, User.Role.ToString()),
+            //new Claim(JwtRegisteredClaimNames.Name, User.Username)
+            
+
+             new Claim(
+                 ClaimTypes.NameIdentifier,
+                 User.Id.ToString()),
+            new Claim(
+                ClaimTypes.Name,
+                User.Username ),
+            new Claim(
+                ClaimTypes.Role,
+                User.Role.ToString())
+
+    };
 
         var key = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));

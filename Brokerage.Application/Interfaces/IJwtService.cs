@@ -7,7 +7,7 @@ namespace Brokerage.Application.Interfaces
 {
     public interface IJwtService
     {
-        string GenerateAccessToken(Clients client);
+        string GenerateAccessToken(Users User);
 
         string GenerateRefreshToken();
     }

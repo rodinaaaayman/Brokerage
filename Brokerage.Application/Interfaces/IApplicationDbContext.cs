@@ -7,6 +7,7 @@ namespace Brokerage.Application.Interfaces
 {
     public interface IApplicationDbContext
     {
+        DbSet<Users> Users { get; }
         DbSet<Clients> Clients { get; }
         DbSet<Orders> Orders { get; }
         DbSet <Executions> Executions { get; }

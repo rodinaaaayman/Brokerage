@@ -6,11 +6,13 @@ using Brokerage.Application.Services.clients.Queries.GetClientOrders;
 using Brokerage.Application.Services.clients.Queries.GetClients;
 using Brokerage.DTOs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Brokerage.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientsController : ControllerBase
